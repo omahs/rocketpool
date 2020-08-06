@@ -118,8 +118,9 @@ contract RocketETHToken is RocketBase, StandardToken, RocketETHTokenInterface {
         RocketNetworkBalancesInterface rocketNetworkBalances = RocketNetworkBalancesInterface(getContractAddress("rocketNetworkBalances"));
         uint256 totalEthBalance = rocketNetworkBalances.getTotalETHBalance();
         uint256 rethSupply = rocketNetworkBalances.getTotalRETHSupply();
-        // Calculate and return
+        // Use 1:1 ratio if no rETH is minted
         if (rethSupply == 0) { return _actualAmount; }
+        // Calculate and return
         return _actualAmount.mul(totalEthBalance).div(rethSupply);
     }
 
@@ -129,8 +130,11 @@ contract RocketETHToken is RocketBase, StandardToken, RocketETHTokenInterface {
         RocketNetworkBalancesInterface rocketNetworkBalances = RocketNetworkBalancesInterface(getContractAddress("rocketNetworkBalances"));
         uint256 totalEthBalance = rocketNetworkBalances.getTotalETHBalance();
         uint256 rethSupply = rocketNetworkBalances.getTotalRETHSupply();
+        // Check network ETH balance
+        require(totalEthBalance > 0, "rETH token operations cannot be performed while total network balance is zero");
+        // Use 1:1 ratio if no rETH is minted
+        if (rethSupply == 0) { return _expectedAmount; }
         // Calculate and return
-        if (totalEthBalance == 0) { return _expectedAmount; }
         return _expectedAmount.mul(rethSupply).div(totalEthBalance);
     }
 
