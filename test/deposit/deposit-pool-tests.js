@@ -4,7 +4,7 @@ import { shouldRevert } from '../_utils/testing';
 import { userDeposit } from '../_helpers/deposit';
 import { submitBalances } from '../_helpers/network';
 import { registerNode, setNodeTrusted, nodeDeposit } from '../_helpers/node';
-import { getRethExchangeRate, getRethTotalSupply } from '../_helpers/tokens';
+import { getRethActualSupply } from '../_helpers/tokens';
 import { getDepositSetting, setDepositSetting } from '../_helpers/settings';
 import { assignDeposits } from './scenario-assign-deposits';
 import { deposit } from './scenario-deposit';
@@ -55,17 +55,10 @@ export default function() {
                 value: web3.utils.toWei('10', 'ether'),
             });
 
-            // Get current rETH exchange rate
-            let exchangeRate1 = await getRethExchangeRate();
-
-            // Update network ETH total to 130% to alter rETH exchange rate
-            let totalBalance = web3.utils.toWei('13', 'ether');
-            let rethSupply = await getRethTotalSupply();
+            // Update network ETH balance to 133% to alter rETH exchange rate
+            let rethSupply = await getRethActualSupply();
+            let totalBalance = rethSupply.mul(web3.utils.toBN(4)).div(web3.utils.toBN(3));
             await submitBalances(1, totalBalance, 0, rethSupply, {from: trustedNode});
-
-            // Get & check updated rETH exchange rate
-            let exchangeRate2 = await getRethExchangeRate();
-            assert(!exchangeRate1.eq(exchangeRate2), 'rETH exchange rate has not changed');
 
             // Deposit again with updated rETH exchange rate
             await deposit({

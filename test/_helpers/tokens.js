@@ -9,14 +9,6 @@ export async function getRethBalance(address) {
 }
 
 
-// Get the current rETH exchange rate
-export async function getRethExchangeRate() {
-    const rocketETHToken = await RocketETHToken.deployed();
-    let exchangeRate = await rocketETHToken.getExchangeRate.call();
-    return exchangeRate;
-}
-
-
 // Get the current rETH collateral rate
 export async function getRethCollateralRate() {
     const rocketETHToken = await RocketETHToken.deployed();
@@ -25,11 +17,11 @@ export async function getRethCollateralRate() {
 }
 
 
-// Get the current rETH token supply
-export async function getRethTotalSupply() {
+// Get the current rETH token actual total supply
+export async function getRethActualSupply() {
     const rocketETHToken = await RocketETHToken.deployed();
-    let totalSupply = await rocketETHToken.totalSupply.call();
-    return totalSupply;
+    let actualSupply = await rocketETHToken.actualTotalSupply.call();
+    return actualSupply;
 }
 
 

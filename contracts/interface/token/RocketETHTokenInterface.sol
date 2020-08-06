@@ -5,7 +5,6 @@ pragma solidity 0.6.12;
 import "./ERC20.sol";
 
 interface RocketETHTokenInterface is ERC20 {
-    function getExchangeRate() external view returns (uint256);
     function getCollateralRate() external view returns (uint256);
     function deposit() external payable;
     function mint(uint256 _amount, address _to) external;

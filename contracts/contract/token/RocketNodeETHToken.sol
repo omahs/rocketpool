@@ -36,7 +36,7 @@ contract RocketNodeETHToken is RocketBase, StandardToken, RocketNodeETHTokenInte
         require(_amount > 0, "Invalid token mint amount");
         // Update balance & supply
         balances[_to] = balances[_to].add(_amount);
-        totalSupply = totalSupply.add(_amount);
+        tokenSupply = tokenSupply.add(_amount);
         // Emit tokens minted event
         emit TokensMinted(_to, _amount, now);
     }
@@ -50,7 +50,7 @@ contract RocketNodeETHToken is RocketBase, StandardToken, RocketNodeETHTokenInte
         require(address(this).balance >= _amount, "Insufficient ETH balance for exchange");
         // Update balance & supply
         balances[msg.sender] = balances[msg.sender].sub(_amount);
-        totalSupply = totalSupply.sub(_amount);
+        tokenSupply = tokenSupply.sub(_amount);
         // Transfer ETH to sender
         msg.sender.transfer(_amount);
         // Emit tokens burned event

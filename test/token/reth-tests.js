@@ -7,7 +7,7 @@ import { getMinipoolWithdrawalUserBalance, createMinipool, stakeMinipool, submit
 import { submitBalances, depositValidatorWithdrawal, processValidatorWithdrawal } from '../_helpers/network';
 import { registerNode, setNodeTrusted } from '../_helpers/node';
 import { setNetworkSetting } from '../_helpers/settings';
-import { getRethBalance, getRethExchangeRate, getRethTotalSupply } from '../_helpers/tokens';
+import { getRethBalance, getRethActualSupply } from '../_helpers/tokens';
 import { burnReth } from './scenario-burn-reth';
 
 export default function() {
@@ -35,9 +35,6 @@ export default function() {
         let rethBalance;
         before(async () => {
 
-            // Get current rETH exchange rate
-            let exchangeRate1 = await getRethExchangeRate();
-
             // Make deposit
             await userDeposit({from: staker, value: web3.utils.toWei('16', 'ether')});
 
@@ -58,16 +55,12 @@ export default function() {
 
             // Update network ETH total to alter rETH exchange rate
             let minipoolUserBalance = await getMinipoolWithdrawalUserBalance(minipool.address);
-            let rethSupply = await getRethTotalSupply();
+            let rethSupply = await getRethActualSupply();
             await submitBalances(1, minipoolUserBalance, 0, rethSupply, {from: trustedNode});
 
             // Get & check staker rETH balance
             rethBalance = await getRethBalance(staker);
             assert(rethBalance.gt(web3.utils.toBN(0)), 'Incorrect staker rETH balance');
-
-            // Get & check updated rETH exchange rate
-            let exchangeRate2 = await getRethExchangeRate();
-            assert(!exchangeRate1.eq(exchangeRate2), 'rETH exchange rate has not changed');
 
         });
 
