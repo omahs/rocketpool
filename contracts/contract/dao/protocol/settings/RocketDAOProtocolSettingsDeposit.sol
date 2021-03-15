@@ -16,7 +16,7 @@ contract RocketDAOProtocolSettingsDeposit is RocketDAOProtocolSettings, RocketDA
         // Initialize settings on deployment
         if(!getBool(keccak256(abi.encodePacked(settingNameSpace, "deployed")))) {
             // Apply settings
-            setSettingBool("deposit.enabled", true);
+            setSettingBool("deposit.enabled", false);           // Disabled at beta launch
             setSettingBool("deposit.assign.enabled", true);
             setSettingUint("deposit.minimum", 0.01 ether);
             setSettingUint("deposit.pool.maximum", 1000 ether);

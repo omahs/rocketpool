@@ -18,15 +18,15 @@ contract RocketDAOProtocolSettingsNetwork is RocketDAOProtocolSettings, RocketDA
             // Apply settings
             setSettingUint("network.consensus.threshold", 0.51 ether);      // 51%
             setSettingBool("network.submit.balances.enabled", true);
-            setSettingUint("network.submit.balances.frequency", 5760);      // ~24 hours
+            setSettingUint("network.submit.balances.frequency", 240);       // ~1 hour
             setSettingBool("network.submit.prices.enabled", true);
-            setSettingUint("network.submit.prices.frequency", 5760);        // ~24 hours
+            setSettingUint("network.submit.prices.frequency", 240);         // ~1 hour
             setSettingBool("network.process.withdrawals.enabled", true);
             setSettingUint("network.node.fee.minimum", 0.05 ether);         // 5%
             setSettingUint("network.node.fee.target", 0.10 ether);          // 10%
             setSettingUint("network.node.fee.maximum", 0.20 ether);         // 20%
             setSettingUint("network.node.fee.demand.range", 1000 ether);
-            setSettingUint("network.reth.collateral.target", 0.1 ether);   
+            setSettingUint("network.reth.collateral.target", 0 ether);      // rETH collateralized by deposit pool only for beta
             setSettingAddress("network.withdrawal.contract.address", address(0x0));  // The ETH2 system withdrawal contract address
             // Settings initialized
             setBool(keccak256(abi.encodePacked(settingNameSpace, "deployed")), true);

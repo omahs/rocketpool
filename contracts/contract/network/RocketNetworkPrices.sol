@@ -25,7 +25,7 @@ contract RocketNetworkPrices is RocketBase, RocketNetworkPricesInterface {
         // Set contract version
         version = 1;
         // Set initial RPL price
-        setRPLPrice(0.01 ether);
+        setRPLPrice(0.02 ether);
     }
 
     // The block number which prices are current for
