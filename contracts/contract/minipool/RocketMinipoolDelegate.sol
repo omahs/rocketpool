@@ -55,7 +55,7 @@ contract RocketMinipoolDelegate is RocketMinipoolStorageLayout, RocketMinipoolIn
 
     // Get the withdrawal credentials for the minipool contract
     function getWithdrawalCredentials() override public view returns (bytes memory) {
-        return abi.encodePacked(byte(0x01), bytes11(0x0), address(this));
+        return abi.encodePacked(byte(0x02), bytes11(0x0), address(this));
     }
 
     // Prevent direct calls to this contract
