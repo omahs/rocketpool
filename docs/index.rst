@@ -9,13 +9,7 @@ Rocket Pool
 Rocket Pool is a decentralised Ethereum staking network built to be compatible with the Ethereum 2.0 beacon chain.
 
 
-Contents
+Documentation has moved!
 ========
 
-.. toctree::
-    :maxdepth: 2
-
-    rocket-pool/introduction.rst
-    contracts/introduction.rst
-    js-library/introduction.rst
-    smart-node/introduction.rst
+We have moved to `https://docs.rocketpool.net <https://docs.rocketpool.net>`_, please update your bookmarks.
