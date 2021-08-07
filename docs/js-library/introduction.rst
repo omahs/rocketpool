@@ -5,7 +5,7 @@ The Rocket Pool JavaScript Library
 Rocket Pool
 ===========
 
-.. image:: logo.png
+.. image:: ../logo.png
     :width: 300px
     :alt: Rocket Pool logo
     :align: center
