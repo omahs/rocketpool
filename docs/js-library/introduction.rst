@@ -2,30 +2,18 @@
 The Rocket Pool JavaScript Library
 ##################################
 
+Rocket Pool
+===========
 
-************
-Introduction
-************
+.. image:: logo.png
+    :width: 300px
+    :alt: Rocket Pool logo
+    :align: center
 
-The Rocket Pool JavaScript library is the primary means of interaction with the Rocket Pool network for users and applications.
-It is used by applications such as the `Rocket Pool website <https://www.rocketpool.net/>`_ to retrieve information about the network and facilitate user interaction.
-It provides wrapper methods which load the Rocket Pool contracts with `web3.js <https://github.com/ethereum/web3.js/>`_ and abstractions to use many of their features easily.
-
-This guide assumes familiarity with JavaScript and provides all code samples as JS.
+Rocket Pool is a decentralised Ethereum staking network built to be compatible with the Ethereum 2.0 beacon chain.
 
 
-********
-Contents
-********
+Documentation has moved!
+========
 
-.. toctree::
-    :maxdepth: 2
-
-    getting-started.rst
-    contracts.rst
-    deposit.rst
-    minipool.rst
-    network.rst
-    node.rst
-    settings.rst
-    tokens.rst
+We have moved to `https://docs.rocketpool.net <https://docs.rocketpool.net>`_, please update your bookmarks.

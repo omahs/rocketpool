@@ -1,28 +1,17 @@
 .. _js-library-deposit:
 
-#######
-Deposit
-#######
+Rocket Pool
+===========
+
+.. image:: logo.png
+    :width: 300px
+    :alt: Rocket Pool logo
+    :align: center
+
+Rocket Pool is a decentralised Ethereum staking network built to be compatible with the Ethereum 2.0 beacon chain.
 
 
-********
-Overview
-********
+Documentation has moved!
+========
 
-The ``deposit`` module is used to get the current deposit pool balance, make user deposits, and assign deposited ETH to minipools.
-
-
-.. _js-library-deposit-methods:
-
-*******
-Methods
-*******
-
-    * ``deposit.getBalance()``:
-      Get the current balance of the deposit pool in wei; returns ``Promise<string>``
-
-    * ``deposit.deposit(options, onConfirmation)``:
-      Make a user deposit; returns ``Promise<TransactionReceipt>``
-
-    * ``deposit.assignDeposits(options, onConfirmation)``:
-      Assign deposited ETH to queued minipools; returns ``Promise<TransactionReceipt>``
+We have moved to `https://docs.rocketpool.net <https://docs.rocketpool.net>`_, please update your bookmarks.
