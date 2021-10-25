@@ -104,7 +104,7 @@ export default function() {
           await voteScrub(prelaunchMinipool, {from: trustedNode1});
           await voteScrub(prelaunchMinipool, {from: trustedNode2});
 
-          await shouldRevert(close(prelaunchMinipool, { from: node, }), 'Closed minipool before fund were returned', 'Node ETH balance was not successfully transferred to node operator');
+          await shouldRevert(close(prelaunchMinipool, { from: node, }), 'Closed minipool before fund were returned', 'Not enough ETH to refund');
         });
 
 

@@ -441,20 +441,9 @@ contract RocketMinipoolDelegate is RocketMinipoolStorageLayout, RocketMinipoolIn
     function close() override external onlyMinipoolOwner(msg.sender) onlyInitialised {
         // Check current status
         require(status == MinipoolStatus.Dissolved, "The minipool can only be closed while dissolved");
-        // Transfer node balance to node operator
-        uint256 nodeBalance = nodeDepositBalance.add(nodeRefundBalance);
-        if (nodeBalance > 0) {
-            // Update node balances
-            nodeDepositBalance = 0;
-            nodeRefundBalance = 0;
-            // Get node withdrawal address
-            address nodeWithdrawalAddress = rocketStorage.getNodeWithdrawalAddress(nodeAddress);
-            // Transfer balance
-            (bool success,) = nodeWithdrawalAddress.call{value : nodeBalance}("");
-            require(success, "Node ETH balance was not successfully transferred to node operator");
-            // Emit ether withdrawn event
-            emit EtherWithdrawn(nodeWithdrawalAddress, nodeBalance, block.timestamp);
-        }
+        // Refund node operator's funds
+        require(address(this).balance >= nodeRefundBalance, "Not enough ETH to refund");
+        _refund();
         // Update unbonded validator count if minipool is unbonded
         if (depositType == MinipoolDeposit.Empty) {
             RocketDAONodeTrustedInterface rocketDAONodeTrusted = RocketDAONodeTrustedInterface(getContractAddress("rocketDAONodeTrusted"));
@@ -517,7 +506,10 @@ contract RocketMinipoolDelegate is RocketMinipoolStorageLayout, RocketMinipoolIn
     function _refund() private {
         // Update refund balance
         uint256 refundAmount = nodeRefundBalance;
-        nodeRefundBalance = 0;
+        if (refundAmount > address(this).balance) {
+            refundAmount = address(this).balance;
+        }
+        nodeRefundBalance = nodeRefundBalance.sub(refundAmount);
         // Get node withdrawal address
         address nodeWithdrawalAddress = rocketStorage.getNodeWithdrawalAddress(nodeAddress);
         // Transfer refund amount
@@ -558,5 +550,8 @@ contract RocketMinipoolDelegate is RocketMinipoolStorageLayout, RocketMinipoolIn
         } else {
             rocketMinipoolQueue.removeMinipool(depositType);
         }
+        // Refund node balance
+        nodeRefundBalance = nodeRefundBalance.add(nodeDepositBalance);
+        nodeDepositBalance = 0;
     }
 }
