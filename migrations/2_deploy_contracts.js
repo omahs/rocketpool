@@ -90,6 +90,9 @@ const contracts = {
   // Utils
   addressQueueStorage:                      artifacts.require('AddressQueueStorage.sol'),
   addressSetStorage:                        artifacts.require('AddressSetStorage.sol'),
+  // Supernode
+  rocketSupernodeManager:                   artifacts.require('RocketSupernodeManager.sol'),
+  rocketSupernodeDelegate:                  artifacts.require('RocketSupernodeDelegate.sol'),
 };
 
 // Development helper contracts
